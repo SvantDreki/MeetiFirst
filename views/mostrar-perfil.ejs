@@ -1,0 +1,38 @@
+<main class="asistentes contenedor">
+    <h1><%= nombrePagina %></h1>
+    <div class="informacion-usuario">
+        <% const { nombre, imagen, descripcion } = usuario %>
+        <div class="imagen">
+            <% if(imagen) { %>
+                <img src="/uploads/perfiles/<%= imagen %>">
+            <% } %>
+        </div>
+        <div class="texto">
+            <%- descripcion %>
+        </div>
+    </div> <!-- Info Usuarios -->
+
+    <div class="grupos-usuario">
+        <% if(grupos.length) { %>
+            <h2>Grupos de: <%= nombre %></h2>
+            <ul class="lista-grupos">
+                <% grupos.forEach(grupo => { %>
+                    <li>
+                        <div class="imagen">
+                            <% if(grupo.imagen) { %>
+                                <img src="/uploads/grupos/<%= grupo.imagen %>">
+                            <% } else { %>
+                                <img src="/img/meeti.jpg">
+                            <% } %>
+                        </div>
+                        <div class="texto">
+                            <a href="/grupos/<%= grupo.id  %>">
+                                <h3><%= grupo.nombre %></h3>
+                            </a>
+                        </div>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
+    </div>
+</main>

@@ -1,0 +1,86 @@
+<main class="contenedor panel-administracion">
+    <h1><%= nombrePagina %> </h1>
+    <div class="contenedor-botones">
+        <a href="/nuevo-grupo" class="btn btn-amarillo">Nuevo Grupo</a>
+        <a href="/nuevo-meeti" class="btn btn-azul">Nuevo Meeti</a>
+        <a href="/editar-perfil" class="btn btn-rosa">Editar Perfil</a>
+        <a href="/cambiar-password" class="btn btn-verde">Cambias Passoword</a>
+        <a href="/imagen-perfil" class="btn btn-amarillo">Imagen Perfil</a>
+    </div>
+    <div class="seccion-admin">
+        <h2>Próximos Meeti's</h2>
+        <ul>
+            <% if(meetis.length) { %>
+                <% meetis.forEach(meeti => { %>
+                    <% const { id, fecha, hora, titulo, interesados, slug } = meeti %> 
+                    <li>
+                        <div class="informacion-admin">
+                            <% moment.locale('es-mx') %>
+                            <% const fechaCompleta = `${fecha} ${hora}`; %>  
+                            <p class="fecha"><%= moment(fechaCompleta).format('LLLL'); %> Horas</p>
+                            <a href="/meeti/<%= slug %>" target="_blank">
+                                <h3><%= titulo %> </h3>
+                            </a>   
+                            <small><%= interesados.length %> Interesados</small>
+                        </div>
+                        <div class="acciones contenedor-botones">
+                            <a href="/editar-meeti/<%= id %>" class="btn btn-verde">Editar</a>
+                            <a href="/asistentes/<%= slug %>" class="btn btn-azul2">Asistentes</a>
+                            <a href="/eliminar-meeti/<%= id %>" class="btn btn-rojo">Eliminar</a>
+                        </div>
+                    </li>
+                <% }) %>
+            <% } else { %>
+                <p>Aún no tienes Meeti's creados</p>
+            <% } %> 
+        </ul>
+    </div>
+    <div class="seccion-admin">
+        <h2>Tus Grupos</h2>
+        <ul>
+            <% if(grupos.length) { %>
+                <% grupos.forEach(grupo => { %>
+                    <% const { id, nombre } = grupo %> 
+                    <li>
+                        <div class="informacion-admin">
+                            <h3><%= nombre %> </h3>
+                        </div>
+                        <div class="acciones contenedor-botones">
+                            <a href="/editar-grupo/<%= id %>" class="btn btn-verde">Editar</a>
+                            <a href="/imagen-grupo/<%= id %>" class="btn btn-azul2">Imagen</a>
+                            <a href="/eliminar-grupo/<%= id %>" class="btn btn-rojo">Eliminar</a>
+                        </div>
+                    </li>
+                <% }) %>  
+            <% } else { %>
+                <p>No tienes un grupo actualmente</p>
+            <% } %>   
+        </ul>
+    </div>
+    <div class="seccion-admin">
+        <h2>Meeti's Anteriores</h2>
+        <ul>
+            <% if(antes.length) { %>
+                <% antes.forEach(ant => { %>
+                    <% const { id, fecha, hora, titulo, interesados, slug } = ant %> 
+                    <li>
+                        <div class="informacion-admin">
+                            <% moment.locale('es-mx') %>
+                            <% const fechaCompleta = `${fecha} ${hora}`; %>  
+                            <p class="fecha"><%= moment(fechaCompleta).format('LLLL'); %> Horas</p>
+                            <h3><%= titulo %> </h3>
+                            <small><%= interesados.length %> Interesados</small>
+                        </div>
+                        <div class="acciones contenedor-botones">
+                            <a href="/editar-meeti/<%= id %>" class="btn btn-verde">Editar</a>
+                            <a href="/asistentes/<%= slug %>" class="btn btn-azul2">Asistentes</a>
+                            <a href="/eliminar-meeti/<%= id %>" class="btn btn-rojo">Eliminar</a>
+                        </div>
+                    </li>
+                <% }) %>
+            <% } else { %>
+                <p>Aún no tienes Meeti's Anteriores</p>
+            <% } %> 
+        </ul>
+    </div>
+</main>
